@@ -40,13 +40,18 @@ Details and documentation of these functions can be found in the "BME463_lib.h" 
 
 ## How to Use
 Due to implementation constraints, the algorithm input needs to start with a clean signal. To run properly and replicate the following results, the following steps must be followed in the exact order:
-1) Reset Sender Board
-2) Reset Receiver Board
+1) Connect osciliscope probes to pins A3 and D12.
+2) Reset Sender Board
+3) Reset Receiver Board
 - In this current state, the green LED at D13 should be off. If not, restart.
-3) Run Sender Board File
+4) Run Sender Board File
 - In this current state, the green LED at D13 should be on. If not, restart.
 
 What is happening is that the green LED signals when the receiver board has begun runtime which is at the detection of a signal.
+
+Data Interpretation:
+
+When the input signal is in the expected “clean” state, the duty ratio for when the classification signal is asserted is recorded as false positive rate and the duty ratio for when the classification signal is de-asserted is recorded as a true negative rate. When the input signal is in the expected “noisy” state, the duty ratio for when the classification signal is asserted is recorded as true positive rate and the duty ratio for when the classification signal is de-asserted is recorded as false negative rate.
 
 ### Installation
 
