@@ -1,4 +1,4 @@
-# Project Title
+# Improving the Quality of ECGs Collected using Mobile Phones
 
 With the onset of mobile health technology, there arises the opportunity and need for phone based portable ECG systems to detect and discriminate diagnosable and undiagnosable ECG signals. This report details a real time ECG detection system that is able to classify whether an acquired ECG signal is adequate for diagnostic purposes or if another recording is needed. ECG recordings have been collected from MIT_BIH Noise Stress Test Database, in which 12 collections of 6 different signal-to-noise ratios. Recordings begin with five minutes of clean, unaltered ECG data before alternating between noisy and clean ECG data every two minutes. Signal processing is designed to run on the Nucleo F303K8 microcontroller, and output the determined classification to an oscilloscope.   
 
