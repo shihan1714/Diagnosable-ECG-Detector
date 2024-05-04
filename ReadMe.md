@@ -71,7 +71,7 @@ The noise detection algorithm is detailed in the following chunk and in main.cpp
   
 
 ## How to Use
-Due to implementation constraints, the algorithm input needs to start with a clean signal. To run properly and replicate the following results, the following steps must be followed in the exact order:
+Due to implementation constraints, the algorithm input needs to start with a clean signal. To run properly and replicate my results, the following steps must be followed in the exact order:
 1) Connect osciliscope probes to pins A3 and D12.
 2) Reset Sender Board
 3) Reset Receiver Board
@@ -79,7 +79,7 @@ Due to implementation constraints, the algorithm input needs to start with a cle
 4) Run Sender Board File
 - In this current state, the green LED at D13 should be on. If not, restart.
 
-What is happening is that the green LED signals when the receiver board has begun runtime which is at the detection of a signal.
+What is happening is that the green LED signals when the receiver board has begun runtime which is at the detection of a signal. Readings and behavior should be present on the osciliscope.f
 
 ### Data Interpretation
 
