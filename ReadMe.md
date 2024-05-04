@@ -65,12 +65,14 @@ List the software or hardware inputs required to test your code. This could incl
 Provide example test cases along with the expected output. This helps reviewers understand how your code behaves under different scenarios.
 
 - **Test Case 1:**
-  - Input: [Describe the input data or parameters]
-  - Expected Output: [Describe the expected outcome or result]
+  - Input: 
+Load the ECG data file "118e_6.txt" onto the sender board using the Putty Terminal Emulator. Follow the instructions in the [How to Use](#how-to-use) section.
+  - Expected Output:
+![Alt text](118e-6 FPR.png "Expected Output")
 
 - **Test Case 2:**
   - Input: [Describe the input data or parameters]
-  - Expected Output: [Describe the expected outcome or result]
+  - Expected Output: ![Expected Output](118e-6 FPR.png "Expected Output")
 
 - [Add more test cases as needed]
 
