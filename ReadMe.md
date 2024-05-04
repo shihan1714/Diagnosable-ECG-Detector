@@ -19,9 +19,34 @@ After the serial data preprocessing, the floating point data is fed into the Pan
 - float pan_T_Filter(float Ain, float *yOut);
 - bool pan_T_Threshold(float *yOut, float *thresholdi1, float *spki, float *npki, float *spki_array, float *npki_array) ;
 
-Details and documentation of these functions can be found in the "BME463_lib.h" file.
+Details and documentation of these functions can be found in the "BME463_lib.h" file. The function most relevant to the noise detection algorithm is the pan_T_threshold() function and updates the associated values for thresholding and noise detection:
+
+    /* Main App, Local Variables */ 
+    float output[3] = {0.0, 0.0, 0.0};
+    float NSR = 0.0;
+    float npki = 0.0;
+    float spki = 0.0;
+    float npki_clean = 0.0;
+    float spki_clean = 0.0;
+    float npki_array[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    float spki_array[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    float spki_array_clean[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    float npki_array_clean[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    float thresholdi1 = 0.0;
+    bool QRS_detected = false;
+    bool cur_noise_state = false;
+    bool prev_noise_state = false;
+
 
 ## How to Use
+Due to implementation constraints, the algorithm input needs to start with a clean signal. To run properly and replicate the following results, the following steps must be followed in the exact order:
+1) Reset Sender Board
+2) Reset Receiver Board
+- In this current state, the green LED at D13 should be off. If not, restart.
+3) Run Sender Board File
+- In this current state, the green LED at D13 should be on. If not, restart.
+
+What is happening is that the green LED signals when the receiver board has begun runtime which is at the detection of a signal.
 
 ### Installation
 
