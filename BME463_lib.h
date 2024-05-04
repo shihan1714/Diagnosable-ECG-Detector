@@ -47,25 +47,29 @@ float filter_IIR(float const a, float const* inx, float const* cx, int const nx,
  */
 float filter_FIR(float const a, float const* in, float const* c, int const n);
 
-/* 
- * This function implements the filterin stage of the Pan Thompkins QRS Detection output. 
- * Returning void, this function takes in the analog input signal and modifies the the yOut according to the signal 
- * processing algorithm
- * Ain  := ADC input signal
- * yOut := Output QRS levels
+/**
+ * @brief Implements the filtering stage of the Pan-Tompkins QRS Detection algorithm.
+ * 
+ * This function takes an analog input signal Ain and modifies the output yOut according to the signal processing algorithm.
+ * 
+ * @param Ain ADC input signal.
+ * @param yOut Output QRS levels.
+ * @return float The filtered value of the input signal.
  */
 float pan_T_Filter(float Ain, float *yOut);
 
-/* 
- * This function implements the moving threshold stage of the Pan Thompkind QRS detection algorithm.
- * Returning void, this function takes in yOut array which is the output of the QRS algorithm for the last three values
- * and updates the threshold detection values according to the algorithm.
- * yOut  := ADC input signal
- * peakt := Output QRS levels
- * thresholi1 := Signal noise peak threshold
- * peaki := current peak value
- * spki := current signal peak value
- * npki := current noise peak value
+/**
+ * @brief Implements the moving threshold stage of the Pan-Tompkins QRS detection algorithm.
+ * 
+ * This function updates the threshold detection values based on the output QRS levels from the last three values.
+ * 
+ * @param yOut Pointer to the array containing the output of the QRS algorithm for the last three values.
+ * @param thresholdi1 Pointer to the threshold detection value.
+ * @param spki Pointer to the peak value of the signal (QRS complex).
+ * @param npki Pointer to the peak value of the noise.
+ * @param spki_array Array to store recent peak values of the signal.
+ * @param npki_array Array to store recent peak values of the noise.
+ * @return bool True if a QRS complex is detected, false otherwise.
  */
 bool pan_T_Threshold(float *yOut, float *thresholdi1, float *spki, float *npki, float *spki_array, float *npki_array) ;
 
@@ -107,5 +111,15 @@ float std_dev(float *input_array, int length);
  */
 float array_average(float arr[], int size);
 
+/**
+ * @brief Copies the elements of one array to another.
+ * 
+ * This function copies the elements of the original array to a destination array.
+ * 
+ * @param arr_orig Pointer to the original array.
+ * @param arr_copy Pointer to the destination array where elements will be copied.
+ * @param size Size of the arrays.
+ * @return void
+ */
 void save_array(float *arr_orig, float *arr_copy, int size);
 #endif

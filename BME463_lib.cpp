@@ -64,12 +64,14 @@ float filter_FIR(const float a, const float *in, const float *c, const int n){
     return a*sumNum;
 }
 
-/* 
- * This function implements the filterin stage of the Pan Thompkins QRS Detection output. 
- * Returning void, this function takes in the analog input signal and modifies the the yOut according to the signal 
- * processing algorithm
- * Ain  := ADC input signal
- * yOut := Output QRS levels
+/**
+ * @brief Implements the filtering stage of the Pan-Tompkins QRS Detection algorithm.
+ * 
+ * This function takes an analog input signal Ain and modifies the output yOut according to the signal processing algorithm.
+ * 
+ * @param Ain ADC input signal.
+ * @param yOut Output QRS levels.
+ * @return float The filtered value of the input signal.
  */
 float pan_T_Filter(float Ain, float *yOut){
     float value = 0.0;
@@ -136,12 +138,18 @@ float pan_T_Filter(float Ain, float *yOut){
     return value;
 }
 
-/* 
- * This function implements the moving threshold stage of the Pan Thompkind QRS detection algorithm.
- * Returning void, this function takes in yOut array which is the output of the QRS algorithm for the last three values
- * and updates the threshold detection values according to the algorithm.
- * Ain  := ADC input signal
- * yOut := Output QRS levels
+/**
+ * @brief Implements the moving threshold stage of the Pan-Tompkins QRS detection algorithm.
+ * 
+ * This function updates the threshold detection values based on the output QRS levels from the last three values.
+ * 
+ * @param yOut Pointer to the array containing the output of the QRS algorithm for the last three values.
+ * @param thresholdi1 Pointer to the threshold detection value.
+ * @param spki Pointer to the peak value of the signal (QRS complex).
+ * @param npki Pointer to the peak value of the noise.
+ * @param spki_array Array to store recent peak values of the signal.
+ * @param npki_array Array to store recent peak values of the noise.
+ * @return bool True if a QRS complex is detected, false otherwise.
  */
 bool pan_T_Threshold(float *yOut, float *thresholdi1, float *spki, float *npki, float *spki_array, float *npki_array) {
     static float peakt = 0.0;
@@ -170,8 +178,16 @@ bool pan_T_Threshold(float *yOut, float *thresholdi1, float *spki, float *npki, 
     return QRS_detected;
 }
 
-/* 
- * This function Queues the most recent value into an array and returns the average of the input array.
+/**
+ * @brief Queues the most recent value into an array and calculates the average of the input array.
+ * 
+ * This function inserts the most recent value (input) into the input_array, shifts the existing values to the right,
+ * and then calculates the average of the input_array.
+ * 
+ * @param input_array Pointer to the input array.
+ * @param length Length of the input array.
+ * @param input The most recent value to be inserted into the input_array.
+ * @return float The average of the input_array.
  */
 float array_running_avg(float *input_array, int length, float input){
     shift_right(input_array, length);
@@ -240,6 +256,17 @@ float array_average(float arr[], int size){
     return average;
 }
 
+/*
+ * Copies the elements of one array to another.
+ * 
+ * Parameters:
+ * arr_orig : Pointer to the original array
+ * arr_copy : Pointer to the destination array where elements will be copied
+ * size     : Size of the arrays
+ * 
+ * Returns:
+ * Void
+ */
 void save_array(float *arr_orig, float *arr_copy, int size){
     for(int i = 0; i < size; i++){
         arr_copy[i] = arr_orig[i];

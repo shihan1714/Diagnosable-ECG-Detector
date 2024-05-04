@@ -11,6 +11,7 @@
  * Date:       05-24-2021
  * 
  * Modified by Royal Oakes, 02-02-2022.
+ * Modified by Andrew Shih, 05-04-2024
  */
 
 
@@ -28,17 +29,12 @@
 //Serial      pc(USBTX,USBRX);    // Optionally - Set up serial communication with the host PC for printing statement to console
 Serial      sender(D1,D0);      // Set up serial communication with the Nucleo which is sending the signal to us (Sender)
 AnalogIn    Ain(A0);        // Input 
-DigitalOut  D5_TP(D2);
-DigitalOut  D6_FP(D6);
-DigitalOut  D7_TN(D7);
-DigitalOut  D8_FN(D8);
-
-DigitalOut  D11_Out(D11);   // Test `sig out
+DigitalOut  D11_Out(D11);   // Test sig out
 DigitalOut  D12_Out(D12);   // cur_noise_state flag
 DigitalOut  D13_LED(D13);   // QRS detection output
-AnalogOut   ADC3(A3);       // signal in output 
-AnalogOut   ADC4(A4);       // deriv2Out output 
-AnalogOut   ADC5(A5);       // MWI output 
+AnalogOut   ADC3(A3);       // signal input
+AnalogOut   ADC4(A4);       // conigurable ADC output. Currently set to SPKI value
+AnalogOut   ADC5(A5);       // Configurable ADC output. Currently not used. 
 
 //**************************************************************************
 /* SEND/RECEIVE VARIABLES */
@@ -94,20 +90,6 @@ int main() {
     bool prev_noise_state = false;
     float filter_splice = 0.0;
 
-    /* Performance Evaluation Variables
-    360 sps, each sample is 2777.777 us
-    Clean/Noisy Periods = 5 mins = */
-    int sps_cc = 0;
-    int sec_cc = 0;
-    int min_cc = 0;
-    int FP_time_sec = 0;
-    int TP_time_sec = 0;
-    float FP_rate = 0.0;
-    float TP_rate = 0.0;
-    int TN_time_sec = 0;
-    int FN_time_sec = 0;
-    float TN_rate = 0.0;
-    float FN_rate = 0.0;
 //**************************************************************************
     // Set up serial communication
     sender.baud(115200);
@@ -159,7 +141,6 @@ int main() {
             
             ADC3 = input; 
             ADC4 = spki;
-            ADC5 = TN_rate/3.3;
 
             D12_Out = cur_noise_state;
             D11_Out = QRS_detected;
@@ -167,34 +148,6 @@ int main() {
                 D13_LED = 1;
             }
             
-            // Performance Evaluations
-
-            if(sps_cc > 360 && D13_LED){
-                sps_cc = 0;
-                sec_cc ++;
-                // Check Noise detector every second
-                if(cur_noise_state){ // Noisy
-                    if(sec_cc <= 300 || (sec_cc >= 420 && sec_cc <= 540)){ // Clean mode
-                        FP_time_sec++;  // If noisy in this second, its one second of false positives
-                        FP_rate = (float) FP_time_sec/420; // Wait for two intervals to pass
-                    }
-                    if((sec_cc <= 300 && sec_cc <= 420)){ // Noisy Mode
-                        TP_time_sec++;  // If noisy in this second, its one second of true positives
-                        TP_rate = (float) TP_time_sec/120; // Wait for two intervals to pass
-                    }
-                } else { // Not Noisy
-                    if(sec_cc <= 300 || (sec_cc >= 420 && sec_cc <= 540)){ // Clean mode
-                        TN_time_sec++;  // If noisy in this second, its one second of false positives
-                        TN_rate = (float) TN_time_sec/420; // Wait for two intervals to pass
-                    }
-                    if((sec_cc <= 300 && sec_cc <= 420)){ // Noisy Mode
-                        FN_time_sec++;  // If noisy in this second, its one second of true positives
-                        FN_rate = (float) FN_time_sec/120; // Wait for two intervals to pass
-                    }
-                }
-            } else {
-                sps_cc ++;
-            }
             FILTERING_FLAG = false;
         }
     }
