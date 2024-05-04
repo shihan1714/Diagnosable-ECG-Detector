@@ -13,17 +13,19 @@ With the onset of mobile health technology, there arises the opportunity and nee
 
 ## Introduction
 
-Provide a brief overview of your project, including its purpose and functionality.
+This project operates on two STM32 Nucleo-F303K8 with a sim card for reading ECG data for testing.  The two Nucleo-F303K8 boards are based on a sender board and a receiver board, communicating via SPI. The sender board reads a sim card for ECG data and sends the data via SPI to pins D0 and D1 on the receiver board. The receiver board code then converts the serial data into a floating point value that is a single sample of ECG at 360 Hz. This floating point conversion is done in the ISR function "void ISRfxn(){}". At the end of "ISRfxn()", the ISR state flag "FILTERING_STATE" is asserted which starts the main application of thsi project.
+
+After the serial data preprocessing, the floating point data is fed into the Pan-Tompkins QRS detection algorithm broken into two stages:
+- float pan_T_Filter(float Ain, float *yOut);
+- bool pan_T_Threshold(float *yOut, float *thresholdi1, float *spki, float *npki, float *spki_array, float *npki_array) ;
+
+Details and documentation of these functions can be found in the "BME463_lib.h" file.
 
 ## How to Use
 
 ### Installation
 
 Include any necessary steps to install and set up your code. This may include dependencies, environment setup, or configuration instructions.
-
-### Interacting with the Code
-
-Describe the steps required to interact with your code. For example, if it's a command-line tool, provide instructions for running it with sample commands. If it's a GUI application, explain how to launch it and navigate through its features.
 
 ## Test Inputs
 
