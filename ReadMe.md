@@ -38,6 +38,37 @@ Details and documentation of these functions can be found in the "BME463_lib.h" 
     bool cur_noise_state = false;
     bool prev_noise_state = false;
 
+The noise detection algorithm is detailed in the following chunk and in main.cpp. When the signal is considered diagnosable, the npki and spki values are saved. When the signal is considered undiagnosable, the npki and spki values update but the saved "clean" values are preserved. The diagnosable/undiagnosable classification exists in the first and second line below and determine the cur_noise_state. When the cur_noise_state changes states, the clean npki and spki values are loaded into the runnign version. Then the prev_noise_state is updated. 
+
+    NSR = npki/sqrt(npki*npki + spki*spki);
+    cur_noise_state = NSR > SNR_THRESHOLD;
+    
+    if(!cur_noise_state){
+        // Acceptable amount of noise, save copy to clean array
+        save_array(npki_array, npki_array_clean, 8);
+        save_array(spki_array, spki_array_clean, 8);
+        spki_clean = spki;
+        npki_clean = npki;
+    }          
+    
+    if(!cur_noise_state && prev_noise_state){    
+        // If state transitions from noisy to clean, restore spki and npki arrays to clean state 
+        save_array(npki_array_clean, npki_array, 8);
+        save_array(spki_array_clean, spki_array, 8);
+        spki = array_average(spki_array, 8);
+        npki = array_average(npki_array, 8);
+    }
+    
+    prev_noise_state = cur_noise_state;
+    
+    ADC3 = input; 
+    ADC4 = spki;
+    ADC5 = TN_rate/3.3;
+  
+    D12_Out = cur_noise_state;
+    D11_Out = QRS_detected;
+
+  
 
 ## How to Use
 Due to implementation constraints, the algorithm input needs to start with a clean signal. To run properly and replicate the following results, the following steps must be followed in the exact order:
