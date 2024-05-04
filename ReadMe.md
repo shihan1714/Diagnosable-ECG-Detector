@@ -92,11 +92,9 @@ Install and run Putty Terminal Emulator with the sender and receiver board detec
 
 List the software or hardware inputs required to test your code. This could include specific input files, signal generator settings, or hardware configurations.
 
-## Example Test Cases
+## Example Test Case
 
-Provide example test cases along with the expected output. This helps reviewers understand how your code behaves under different scenarios.
-
-- **Test Case 1:**
+- **Test Case:**
   - Input: Load the ECG data file "118e_6.txt" onto the sender board using the Putty Terminal Emulator. Follow the instructions in the [How to Use](#how-to-use) section.
   - Expected Output:
 
