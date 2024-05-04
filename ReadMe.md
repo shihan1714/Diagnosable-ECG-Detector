@@ -49,13 +49,12 @@ Due to implementation constraints, the algorithm input needs to start with a cle
 
 What is happening is that the green LED signals when the receiver board has begun runtime which is at the detection of a signal.
 
-###Data Interpretation:
+### Data Interpretation:
 
 When the input signal is in the expected “clean” state, the duty ratio for when the classification signal is asserted is recorded as false positive rate and the duty ratio for when the classification signal is de-asserted is recorded as a true negative rate. When the input signal is in the expected “noisy” state, the duty ratio for when the classification signal is asserted is recorded as true positive rate and the duty ratio for when the classification signal is de-asserted is recorded as false negative rate.
 
 ### Installation
-
-Include any necessary steps to install and set up your code. This may include dependencies, environment setup, or configuration instructions.
+Install and run Putty Terminal Emulator with the sender and receiver board detected on their corresponding communciation ports found in your device manager window (windows OS). Then set the buad rate to 115200.
 
 ## Test Inputs
 
