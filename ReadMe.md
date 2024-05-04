@@ -6,6 +6,7 @@ With the onset of mobile health technology, there arises the opportunity and nee
 
 - [Introduction](#introduction)
 - [How to Use](#how-to-use)
+  - [Data Interpretation](#data-interpretation)
   - [Installation](#installation)
 - [Test Inputs](#test-inputs)
 - [Example Test Cases](#example-test-cases)
@@ -49,7 +50,7 @@ Due to implementation constraints, the algorithm input needs to start with a cle
 
 What is happening is that the green LED signals when the receiver board has begun runtime which is at the detection of a signal.
 
-### Data Interpretation:
+### Data Interpretation
 
 When the input signal is in the expected “clean” state, the duty ratio for when the classification signal is asserted is recorded as false positive rate and the duty ratio for when the classification signal is de-asserted is recorded as a true negative rate. When the input signal is in the expected “noisy” state, the duty ratio for when the classification signal is asserted is recorded as true positive rate and the duty ratio for when the classification signal is de-asserted is recorded as false negative rate.
 
@@ -65,18 +66,11 @@ List the software or hardware inputs required to test your code. This could incl
 Provide example test cases along with the expected output. This helps reviewers understand how your code behaves under different scenarios.
 
 - **Test Case 1:**
-  - Input: 
-Load the ECG data file "118e_6.txt" onto the sender board using the Putty Terminal Emulator. Follow the instructions in the [How to Use](#how-to-use) section.
+  - Input: Load the ECG data file "118e_6.txt" onto the sender board using the Putty Terminal Emulator. Follow the instructions in the [How to Use](#how-to-use) section.
   - Expected Output:
-![Alt text](118e-6 FPR.png "Expected Output")
 
-- **Test Case 2:**
-  - Input: [Describe the input data or parameters]
-  - Expected Output: ![Expected Output](118e-6 FPR.png "Expected Output")
-
-- [Add more test cases as needed]
+![Expected Output](./118e-6%20FPR.png "Expected Output")
 
 ## Testing Metrics
 
-Describe the metrics used to evaluate the functionality and accuracy of your algorithm. This could include performance benchmarks, accuracy percentages, or any other relevant measurements.
-
+When the input signal is in the expected “clean” state, the duty ratio for when the classification signal is asserted is recorded as false positive rate and the duty ratio for when the classification signal is de-asserted is recorded as a true negative rate. When the input signal is in the expected “noisy” state, the duty ratio for when the classification signal is asserted is recorded as true positive rate and the duty ratio for when the classification signal is de-asserted is recorded as false negative rate.
