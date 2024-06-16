@@ -11,6 +11,7 @@ With the onset of mobile health technology, there arises the opportunity and nee
 - [Test Inputs](#test-inputs)
 - [Example Test Cases](#example-test-cases)
 - [Testing Metrics](#testing-metrics)
+- [Results](#results)
 
 ## Introduction
 
@@ -100,6 +101,10 @@ List the software or hardware inputs required to test your code. This could incl
 
 ![Expected Output](./118e-6%20FPR.png "Expected Output")
 
-## Testing Metrics
+## Testing Metrics and results
 
 When the input signal is in the expected “clean” state, the duty ratio for when the classification signal is asserted is recorded as false positive rate and the duty ratio for when the classification signal is de-asserted is recorded as a true negative rate. When the input signal is in the expected “noisy” state, the duty ratio for when the classification signal is asserted is recorded as true positive rate and the duty ratio for when the classification signal is de-asserted is recorded as false negative rate.
+
+Using ECG data from the <a href="https://physionet.org/content/mitdb/1.0.0/">MIT-BIH Arrhythmia Database</a>, ECG data from two patients sampled at varying degrees of signal to noise ratios was analyzed and tested agianst this system. Performance metrics using the detection on/off duty ratio with the duty frequency being 200 sps was collected over the a span of time using test records. Performance is shown in the image below:
+
+![Performance Table](./performance_chart.png "Performance Table")
