@@ -12,6 +12,7 @@ With the onset of mobile health technology, there arises the opportunity and nee
 - [Example Test Cases](#example-test-cases)
 - [Testing Metrics](#testing-metrics)
 - [Results](#results)
+- [References](#references)
 
 ## Introduction
 
@@ -108,3 +109,7 @@ When the input signal is in the expected “clean” state, the duty ratio for w
 Using ECG data from the <a href="https://physionet.org/content/mitdb/1.0.0/">MIT-BIH Arrhythmia Database</a>, ECG data from two patients sampled at varying degrees of signal to noise ratios was analyzed and tested agianst this system. Performance metrics using the detection on/off duty ratio with the duty frequency being 200 sps was collected over the a span of time using test records. Performance is shown in the image below:
 
 ![Performance Table](./performance_chart.png "Performance Table")
+
+## References
+1) <a href="https://physionet.org/content/mitdb/1.0.0/">MIT-BIH Arrhythmia Database</a>
+2) <a href="https://www.robots.ox.ac.uk/~gari/teaching/cdt/A3/readings/ECG/Pan+Tompkins.pdf"> "A Real-Time QRS Detection Algorithm"</a>
